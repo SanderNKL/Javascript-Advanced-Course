@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Fighting Game</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+
+<div id="startSection">
+    <input type="text" id="playerNameInput" placeholder="Enter your hero's name">
+    <button id="startBtn">Start Game</button>
+</div>
+
+<div id="defeatedScreen" style="display:none; text-align: center;">
+    <h2>You have been defeated!</h2>
+    <button id="tryAgainBtn">Try Again</button>
+</div>
+
+<h1>Fighting Game</h1>
+<div id="rewardSection" style="display:none;">
+    <h3>Choose Your Reward:</h3>
+    <div id="rewards"></div>
+</div>
+<div id="fighters" style="display:none">
+    <div class="fighter-container">
+        <div class="fighter" id="fighter1">
+            <h2 id='fighter-one-name'></h2>
+            <p id="fighter-one-stats"></p>
+        </div>
+        <div class="fighter" id="fighter2">
+            <h2 id='fighter-two-name'></h2>
+            <p id="fighter-two-stats"></p>
+        </div>
+    </div>
+</div>
+
+<button id="attackBtn" disabled>Attack! (100% hit)</button>
+<button id="criticalAttackBtn" disabled>Critical Attack! (80% hit)</button>
+
+<div class="comabtLog" id="comabtLog"></div>
+</body>
+</html>

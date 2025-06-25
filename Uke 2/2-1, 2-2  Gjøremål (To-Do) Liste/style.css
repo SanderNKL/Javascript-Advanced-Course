@@ -1,0 +1,289 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Header styling */
+header {
+    background-color: #4CAF50;
+    color: white;
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header title */
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+/* Task input form styling */
+form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#task-input {
+    width: 250px;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#task-input:focus {
+    border: 2px solid #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.6);
+}
+
+/* Submit button styling */
+form input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Menu styling */
+#menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+#menu label {
+    font-size: 1rem;
+    color: #333;
+}
+
+#menu input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Select box styling */
+#sort-by {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+#sort-by:focus {
+    border: 1px solid #4CAF50;
+}
+
+/* Todo List styling */
+#list-container {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Task item styling */
+.task-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    gap: 10px; /* Added gap between elements */
+}
+
+.task-container.completed {
+    background-color: #d3ffd3;
+    border-left: 5px solid #4CAF50;
+}
+
+.task-container:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.datetime {
+    font-size: 0.9rem;
+    color: #777;
+    flex-shrink: 0;
+    margin-right: 10px; /* Added margin-right to create space between datetime and text */
+}
+
+.description {
+    font-size: 1.2rem;
+    color: #333;
+    border: none;
+    background: none;
+    outline: none;
+    flex-grow: 1;
+}
+
+.description:focus {
+    border-bottom: 2px solid #4CAF50;
+}
+
+/* Task input checkbox */
+.task-container input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 10px; /* Added margin for spacing */
+}
+
+/* Buttons */
+button {
+    padding: 5px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Edit button */
+.edit-button {
+    background-color: #ffa500;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #ff8c00;
+}
+
+/* Delete button */
+.delete-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}
+
+/* Responsive Styling */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #task-input {
+        width: 80%;
+    }
+
+    #menu {
+        flex-direction: column;
+    }
+
+    .task-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .task-container .description {
+        width: 100%;
+    }
+}
+
+/* Modal class styling */
+.modal {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+/* Error message styling */
+.modal p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Button styling */
+.modal button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Button hover effect */
+.modal button:hover {
+    background-color: #0056b3;
+}
+
+/* Backdrop overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 999; /* Behind the modal */
+    display: none; /* Initially hidden */
+}

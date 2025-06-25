@@ -1,0 +1,94 @@
+/* General Layout */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #222;
+    color: #f1f1f1;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+h1, h2, h3 {
+    color: #00ff99;
+}
+
+button {
+    background-color: #00c78c;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #009e70;
+}
+
+button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+/* Sections */
+#startSection, #fighters, #rewardSection, #defeatedScreen {
+    max-width: 600px;
+    background-color: #333;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,255,153,0.5);
+}
+
+/* Fighters Layout */
+.fighter-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.fighter {
+    background-color: #444;
+    padding: 15px;
+    border-radius: 8px;
+    width: 200px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,255,153,0.5);
+}
+
+#comabtLog {
+    text-align: left;
+    background-color: #111;
+    padding: 10px;
+    height: 150px;
+    overflow-y: auto;
+    border: 1px solid #00ff99;
+    margin-top: 15px;
+}
+
+/* Rewards */
+#rewards button {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+}
+
+/* Defeated Screen */
+#defeatedScreen h2 {
+    color: #ff4c4c;
+}
+
+input[type="text"] {
+    padding: 8px;
+    width: 70%;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}

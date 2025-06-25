@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Todo Liste</title>
+</head>
+<body>
+    <header>
+       <h1>Todo Liste</h1>
+       <form id="task-form">
+            <input
+                id="task-input"
+                name="task-input"
+                type="text"
+            >
+            <input type="submit">
+        </form>
+        <div id="menu">
+            <label for="show-completed">Fullførte Tasks</label>
+            <input type="checkbox" name="show-completed" id="show-completed">
+            <select name="sort-by" id="sort-by">
+                <option value="time-desc">Nyeste Først</option>
+                <option value="time-asc">Eldste Først</option>
+                <option value="alpha-asc">A til Å</option>
+                <option value="alpha-desc">Å til A</option>
+            </select>
+        </div>
+    </header>
+    <main id="list-container"></main>
+</body>
+</html>
