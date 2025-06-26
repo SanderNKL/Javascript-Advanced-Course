@@ -1,9 +1,28 @@
+body {
+    color: white;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    width: 50%;
+    height: 50%;
+}
+
 .drum-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
+    width: 25%;
 }
 
 .soundButton {
-    background-color: red;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(20, 19, 22);
 }
