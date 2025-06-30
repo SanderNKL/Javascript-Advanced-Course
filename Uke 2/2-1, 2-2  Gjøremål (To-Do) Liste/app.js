@@ -110,7 +110,7 @@ const sortArray = (a, b) => {
 
 const filterArray = (taskArr) => {
     return taskArr
-        .filter((task) => (filters.showCompleted || !task.completed))
+        .filter(task => filters.showCompleted || !task.completed)
         .sort(sortArray);
 };
 
