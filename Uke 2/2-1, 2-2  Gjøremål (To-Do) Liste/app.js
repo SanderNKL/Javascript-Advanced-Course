@@ -114,6 +114,24 @@ const filterArray = (taskArr) => {
         .sort(sortArray);
 };
 
+const toggleShowCompleted = document.querySelector("#show-completed")
+toggleShowCompleted.addEventListener('change', (e) => {
+    filters.showCompleted = e.target.checked;
+    saveFiltersToStorage(filters);
+    renderPage(tasks);
+});
+
+const setSortBy = document.querySelector("#sort-by")
+setSortBy.addEventListener('change', (e) => {
+    const selection = e.target.value.substring(
+        e.target.selectionStart,
+        e.target.selectionEnd,
+    );
+    filters.sortType = selection;
+    saveFiltersToStorage(filters);
+    renderPage(tasks);
+})
+
 const buildPage = (taskArr) => {
     listContainer.replaceChildren();
     taskArr.forEach(task => {
@@ -161,23 +179,5 @@ const renderPage = () => {
     };
     buildPage(filterArray(tasks));
 }
-
-const toggleShowCompleted = document.querySelector("#show-completed")
-toggleShowCompleted.addEventListener('change', (e) => {
-    filters.showCompleted = e.target.checked;
-    saveFiltersToStorage(filters);
-    renderPage(tasks);
-});
-
-const setSortBy = document.querySelector("#sort-by")
-setSortBy.addEventListener('change', (e) => {
-    const selection = e.target.value.substring(
-        e.target.selectionStart,
-        e.target.selectionEnd,
-    );
-    filters.sortType = selection;
-    saveFiltersToStorage(filters);
-    renderPage(tasks);
-})
 
 renderPage()
