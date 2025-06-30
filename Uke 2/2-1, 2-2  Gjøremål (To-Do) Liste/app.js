@@ -109,8 +109,8 @@ const sortArray = (a, b) => {
     return 0;
 };
 
-const filterArray = (taskArr) => {
-    return taskArr
+const filterArray = (tasksArr) => {
+    return tasksArr
         .filter(task => filters.showCompleted || !task.completed)
         .sort(sortArray);
 };
@@ -133,9 +133,9 @@ setSortBy.addEventListener('change', (e) => {
     renderPage();
 })
 
-const buildPage = (taskArr) => {
+const buildPage = (tasksArr) => {
     listContainer.replaceChildren();
-    taskArr.forEach(task => {
+    tasksArr.forEach(task => {
         const taskContainer = document.createElement('div');
         taskContainer.classList.add('task-container');
         task.completed ? taskContainer.classList.add('completed') : taskContainer.classList.remove('completed');
