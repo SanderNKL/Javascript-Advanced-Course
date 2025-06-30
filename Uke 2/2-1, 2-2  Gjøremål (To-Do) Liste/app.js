@@ -1,6 +1,8 @@
 const taskForm = document.querySelector('#task-form');
 const taskInput = document.querySelector('#task-input');
+const toggleShowCompleted = document.querySelector("#show-completed");
 const listContainer = document.querySelector('#list-container');
+const setSortBy = document.querySelector("#sort-by");
 
 let tasks = [];
 let filters = { showCompleted: false,sortType: 'time-desc' }
@@ -46,6 +48,22 @@ taskForm.addEventListener("submit", (e) => {
     saveTasksToStorage();
     renderPage();
 })
+
+toggleShowCompleted.addEventListener('change', (e) => {
+    filters.showCompleted = e.target.checked;
+    saveFiltersToStorage();
+    renderPage();
+});
+
+setSortBy.addEventListener('change', (e) => {
+    const selection = e.target.value.substring(
+        e.target.selectionStart,
+        e.target.selectionEnd,
+    );
+    filters.sortType = selection;
+    saveFiltersToStorage();
+    renderPage();
+});
 
 const completeTaskInput = (task) => {
     const inputElement = document.createElement('input');
@@ -115,24 +133,6 @@ const filterArray = (tasksArr) => {
         .sort(sortArray);
 };
 
-const toggleShowCompleted = document.querySelector("#show-completed")
-toggleShowCompleted.addEventListener('change', (e) => {
-    filters.showCompleted = e.target.checked;
-    saveFiltersToStorage();
-    renderPage();
-});
-
-const setSortBy = document.querySelector("#sort-by")
-setSortBy.addEventListener('change', (e) => {
-    const selection = e.target.value.substring(
-        e.target.selectionStart,
-        e.target.selectionEnd,
-    );
-    filters.sortType = selection;
-    saveFiltersToStorage();
-    renderPage();
-})
-
 const buildPage = (tasksArr) => {
     listContainer.replaceChildren();
     tasksArr.forEach(task => {
@@ -152,6 +152,7 @@ const buildPage = (tasksArr) => {
         const completeInput = completeTaskInput(task);
         const deleteButton = deleteTaskButton(task);
         const editButton = editTaskButton(task, descriptionElement);
+
         taskContainer.append(
             timestampElement,
             descriptionElement,
