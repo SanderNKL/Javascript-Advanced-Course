@@ -1,9 +1,11 @@
 const taskForm = document.querySelector('#task-form');
 const taskInput = document.querySelector('#task-input');
+const toggleShowCompleted = document.querySelector("#show-completed");
 const listContainer = document.querySelector('#list-container');
+const setSortBy = document.querySelector("#sort-by");
 
-let filters = { showCompleted: false, sortType: 'time-desc' }
 let tasks = [];
+let filters = { showCompleted: false,sortType: 'time-desc' }
 let showModal = false;
 
 const saveTasksToStorage = () => localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -16,9 +18,10 @@ const errorModal = (message) => {
     const errorElement = document.createElement('p');
     errorElement.textContent = message;
 
-    const closeModal = document.createElement('button');
-    closeModal.textContent = "Skjønner";
-    modal.append(errorElement, closeModal);
+    const closeModalBtn = document.createElement('button');
+    closeModalBtn.textContent = "Skjønner";
+
+    modal.append(errorElement, closeModalBtn);
     document.body.append(modal);
 
     modal.showModal();
@@ -46,6 +49,22 @@ taskForm.addEventListener("submit", (e) => {
     renderPage();
 })
 
+toggleShowCompleted.addEventListener('change', (e) => {
+    filters.showCompleted = e.target.checked;
+    saveFiltersToStorage();
+    renderPage();
+});
+
+setSortBy.addEventListener('change', (e) => {
+    const selection = e.target.value.substring(
+        e.target.selectionStart,
+        e.target.selectionEnd,
+    );
+    filters.sortType = selection;
+    saveFiltersToStorage();
+    renderPage();
+});
+
 const completeTaskInput = (task) => {
     const inputElement = document.createElement('input');
     inputElement.type = "checkbox";
@@ -53,8 +72,8 @@ const completeTaskInput = (task) => {
 
     inputElement.addEventListener('change', (e) => {
         task.completed = e.target.checked;
-        saveTasksToStorage(tasks);
-        renderPage(tasks);
+        saveTasksToStorage();
+        renderPage();
     });
     return inputElement;
 };
@@ -70,8 +89,8 @@ const deleteTaskButton = (task) => {
             tasks.splice(taskIndex, 1);
         }
 
-        saveTasksToStorage(tasks);
-        renderPage(tasks);
+        saveTasksToStorage();
+        renderPage();
     });
 
     return buttonElement;
@@ -89,7 +108,7 @@ const editTaskButton = (task, descriptionElement) => {
         if (descriptionElement.readOnly) {
             descriptionElement.focus();
         };
-        saveTasksToStorage(tasks);
+        saveTasksToStorage();
     })
 
     return buttonElement;
@@ -108,15 +127,15 @@ const sortArray = (a, b) => {
     return 0;
 };
 
-const filterArray = (taskArr) => {
-    return taskArr
-        .filter((task) => (filters.showCompleted || !task.completed))
+const filterArray = (tasksArr) => {
+    return tasksArr
+        .filter(task => filters.showCompleted || !task.completed)
         .sort(sortArray);
 };
 
-const buildPage = (taskArr) => {
+const buildPage = (tasksArr) => {
     listContainer.replaceChildren();
-    taskArr.forEach(task => {
+    tasksArr.forEach(task => {
         const taskContainer = document.createElement('div');
         taskContainer.classList.add('task-container');
         task.completed ? taskContainer.classList.add('completed') : taskContainer.classList.remove('completed');
@@ -133,6 +152,7 @@ const buildPage = (taskArr) => {
         const completeInput = completeTaskInput(task);
         const deleteButton = deleteTaskButton(task);
         const editButton = editTaskButton(task, descriptionElement);
+
         taskContainer.append(
             timestampElement,
             descriptionElement,
@@ -161,23 +181,5 @@ const renderPage = () => {
     };
     buildPage(filterArray(tasks));
 }
-
-const toggleShowCompleted = document.querySelector("#show-completed")
-toggleShowCompleted.addEventListener('change', (e) => {
-    filters.showCompleted = e.target.checked;
-    saveFiltersToStorage(filters);
-    renderPage(tasks);
-});
-
-const setSortBy = document.querySelector("#sort-by")
-setSortBy.addEventListener('change', (e) => {
-    const selection = e.target.value.substring(
-        e.target.selectionStart,
-        e.target.selectionEnd,
-    );
-    filters.sortType = selection;
-    saveFiltersToStorage(filters);
-    renderPage(tasks);
-})
 
 renderPage()
