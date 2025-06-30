@@ -2,8 +2,8 @@ const taskForm = document.querySelector('#task-form');
 const taskInput = document.querySelector('#task-input');
 const listContainer = document.querySelector('#list-container');
 
-let filters = { showCompleted: false, sortType: 'time-desc' }
 let tasks = [];
+let filters = { showCompleted: false, sortType: 'time-desc' }
 let showModal = false;
 
 const saveTasksToStorage = () => localStorage.setItem('tasks', JSON.stringify(tasks));
