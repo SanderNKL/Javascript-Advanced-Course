@@ -115,7 +115,7 @@ const filterArray = (taskArr) => {
 };
 
 const buildPage = (taskArr) => {
-    listContainer.innerHTML = "";
+    listContainer.replaceChildren();
     taskArr.forEach(task => {
         const taskContainer = document.createElement('div');
         taskContainer.classList.add('task-container');
