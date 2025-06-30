@@ -16,9 +16,10 @@ const errorModal = (message) => {
     const errorElement = document.createElement('p');
     errorElement.textContent = message;
 
-    const closeModal = document.createElement('button');
-    closeModal.textContent = "Skjønner";
-    modal.append(errorElement, closeModal);
+    const closeModalBtn = document.createElement('button');
+    closeModalBtn.textContent = "Skjønner";
+
+    modal.append(errorElement, closeModalBtn);
     document.body.append(modal);
 
     modal.showModal();
