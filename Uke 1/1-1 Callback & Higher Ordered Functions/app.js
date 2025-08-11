@@ -38,7 +38,7 @@ const shop = [
     },
 ]
 
-// sort
+// sort - Returns a negative if a should come before b, or visa versa. Zero if they are equal. In which they don't change order.
 const sortedShopHigh = shop.sort((a, b) => a.price - b.price);
 console.log('Sorted shop by price, low-high:', sortedShopHigh);
 
