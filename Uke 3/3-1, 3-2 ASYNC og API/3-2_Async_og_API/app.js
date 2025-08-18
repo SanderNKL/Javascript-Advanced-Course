@@ -38,7 +38,7 @@ const timedResponse = () => {
 /* API
 METODER
 - GET: Henter data fra API.
-- POST: Lage data.
+- POST: Lage data OG sende data.
 - PUT: Endre på dataene. Overskriver det ligger der fra før.
 - PATCH: Endrer vi på spesefike felt i dataene våre.
 - DELETE: Sletter data.
