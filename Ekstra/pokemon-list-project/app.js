@@ -3,12 +3,25 @@ const POKEMON_API_URL = "https://pokeapi.co/api/v2";
 
 let page = 1;
 
+let pokemonList = [];
+
+/* Store some states
+- isShiny: boolean
+- direction: string
+- sex: string
+*/
+
 // Fetch Pokemons Service
 const fetchPokemons = async (limit, offset) => {
     try {
         const response = await fetch(`${POKEMON_API_URL}/pokemon?limit=${limit}&offset=${offset}`);
         const jsonBody = await response.json();
-        return jsonBody.results;
+        return jsonBody.results.map(pokemon => ({
+            ...pokemon,
+            isShiny: false,
+            direction: 'front',
+            sex: 'male'
+        }));
     } catch (err) {
         return [];
     }
@@ -44,6 +57,36 @@ const previousPageButton = () => {
     return previousPageBtn;
 };
 
+const renderPokemonImage = (pokemonObj, shiny, sex, direction) => {
+    /* Account for:
+    - Is it a shiny?
+    - Is it male, or female?
+    - Which direction am I facing?
+    */
+
+    if (sex === 'male') {
+        return shiny ? (
+            direction === 'front'
+                ? pokemonObj.sprites.front_shiny
+                : pokemonObj.sprites.back_shiny
+        ) : (
+            direction === 'front'
+                ? pokemonObj.sprites.front_default
+                : pokemonObj.sprites.back_default
+        )
+    } else {
+        return shiny ? (
+            direction === 'front'
+                ? pokemonObj.sprites.front_shiny_female
+                : pokemonObj.sprites.back_shiny_female
+        ) : (
+            direction === 'front'
+                ? pokemonObj.sprites.front_female
+                : pokemonObj.sprites.back_female
+        )
+    }
+}
+
 const buildPage = async (pokemons) => {
     pokemonsContainer.replaceChildren();
     for (let pokemon of pokemons) {
@@ -59,14 +102,52 @@ const buildPage = async (pokemons) => {
         const pokemonNameEl = document.createElement('h1');
         pokemonNameEl.textContent = pokemonData.name;
 
+        const rotateDirection = document.createElement('button');
+        rotateDirection.textContent = 'Rotate Pokemon';
+        rotateDirection.addEventListener('click', () => {
+            pokemon.direction = pokemon.direction === 'front' ? 'back' : 'front';
+            pokemonImg.src = renderPokemonImage(
+                pokemonData,
+                pokemon.isShiny,
+                pokemon.sex,
+                pokemon.direction
+            )
+        })
+
+        const toggleShinyBtn = document.createElement('button');
+        toggleShinyBtn.textContent = 'Toggle Shiny';
+        toggleShinyBtn.addEventListener('click', () => {
+            pokemon.isShiny = !pokemon.isShiny;
+            pokemonImg.src = renderPokemonImage(
+                pokemonData,
+                pokemon.isShiny,
+                pokemon.sex,
+                pokemon.direction
+            )
+        })
+
+        const swapGenderBtn = document.createElement('button');
+        swapGenderBtn.textContent = 'Swap gender button';
+        swapGenderBtn.addEventListener('click', () => {
+            pokemon.sex = pokemon.sex === 'male' ? 'female' : 'male';
+            pokemonImg.src = renderPokemonImage(
+                pokemonData,
+                pokemon.isShiny,
+                pokemon.sex,
+                pokemon.direction
+            )
+        });
+
         pokemonCard.append(
             pokemonImg,
-            pokemonNameEl
+            pokemonNameEl,
+            rotateDirection,
+            toggleShinyBtn,
+            swapGenderBtn
         )
         pokemonsContainer.append(pokemonCard)
     };
 
-    // TODO: Make it so previous or next is disabled, if you cant go further.
     pokemonsContainer.append(
         previousPageButton(),
         nextPageButton()
@@ -75,8 +156,8 @@ const buildPage = async (pokemons) => {
 };
 
 const renderPage = async () => {
-    const pokemons = await fetchPokemons(10, (page - 1) * 10);
-    await buildPage(pokemons);
+    pokemonList = await fetchPokemons(10, (page - 1) * 10);
+    await buildPage(pokemonList);
 };
 
 renderPage().then();
