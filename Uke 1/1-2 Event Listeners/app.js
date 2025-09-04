@@ -21,3 +21,4 @@ form.addEventListener("submit", (e) => {
     console.log("Name:", name);
     console.log("Password:", password);
 });
+
