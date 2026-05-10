@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pokédex</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+<h1>Pokedex</h1>
+
+<!-- NAVIGATION: (NEXT/PREVIOUS PAGE) -->
+<div class="nav">
+  <button onclick="prevPage()">Prev</button>
+  <span id="pageInfo"></span>
+  <button onclick="nextPage()">Next</button>
+</div>
+
+<!-- LIST OF POKEMONS -->
+<div id="pokemonGrid" class="grid"></div>
+
+<!-- LIST OF FAVORITES -->
+<h2>Favorites</h2>
+<div id="favoritesGrid" class="grid"></div>
+
+</body>
+</html>
